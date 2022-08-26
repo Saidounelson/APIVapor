@@ -5,7 +5,15 @@ import Dispatch
 func routes(_ app: Application) throws {
     app.get { req async in
         "It works!"
-    }    
+    }
+    
+
+    let acronymsController = AcronymsController()
+    
+    try app.register(collection: acronymsController)
+
+    
+    /*
     // Create new acronyms
     app.post("api", "acronyms") { req -> EventLoopFuture<Acronym> in
           let acronym = try req.content.decode(Acronym.self)
@@ -13,6 +21,7 @@ func routes(_ app: Application) throws {
             acronym
           }
         }
+    
     // Find all acronyms
     app.get("api","acronyms") { req -> EventLoopFuture<[Acronym]> in
             Acronym.query(on: req.db).all()
@@ -68,4 +77,5 @@ func routes(_ app: Application) throws {
         .unwrap(or: Abort(.notFound))
     }
 
+    */
 }
