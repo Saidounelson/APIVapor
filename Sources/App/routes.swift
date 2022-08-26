@@ -65,5 +65,12 @@ func routes(_ app: Application) throws {
         }.all()
             
     }
+    // Find byfirst
+    app.get("api", "acronyms", "first") {
+      req -> EventLoopFuture<Acronym> in
+      Acronym.query(on: req.db)
+        .first()
+        .unwrap(or: Abort(.notFound))
+    }
 
 }
