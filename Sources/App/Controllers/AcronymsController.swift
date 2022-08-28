@@ -19,6 +19,8 @@ struct AcronymsController: RouteCollection {
         acronymsRoutes.get("search", use: searchHandler)
         acronymsRoutes.get("first", use: getFirstHandler)
         acronymsRoutes.get("sorted", use: sortedHandler)
+        acronymsRoutes.get(":acronymID","user", use: getUserHandler)
+        
     }
     
     func getAllHandler(_ req: Request)
@@ -28,9 +30,13 @@ struct AcronymsController: RouteCollection {
 
     func createHandler(_ req: Request) throws
         -> EventLoopFuture<Acronym> {
-      let acronym = try req.content.decode(Acronym.self)
-      return acronym.save(on: req.db).map { acronym }
-    }
+            let data = try req.content.decode(CreateAcronymData.self)
+            let acronym = Acronym(
+              short: data.short,
+              long: data.long,
+              userID: data.userID)
+            return acronym.save(on: req.db).map { acronym }
+        }
 
     func getHandler(_ req: Request)
         -> EventLoopFuture<Acronym> {
@@ -40,18 +46,21 @@ struct AcronymsController: RouteCollection {
 
     func updateHandler(_ req: Request) throws
         -> EventLoopFuture<Acronym> {
-      let updatedAcronym = try req.content.decode(Acronym.self)
-      return Acronym.find(
-        req.parameters.get("acronymID"),
-        on: req.db)
-        .unwrap(or: Abort(.notFound)).flatMap { acronym in
-          acronym.short = updatedAcronym.short
-          acronym.long = updatedAcronym.long
+      let updateData =
+        try req.content.decode(CreateAcronymData.self)
+      return Acronym
+        .find(req.parameters.get("acronymID"), on: req.db)
+        .unwrap(or: Abort(.notFound,reason: "acronymID is not found"))
+        .flatMap { acronym in
+          acronym.short = updateData.short
+          acronym.long = updateData.long
+          acronym.$user.id = updateData.userID
           return acronym.save(on: req.db).map {
             acronym
           }
         }
     }
+
 
     func deleteHandler(_ req: Request)
         -> EventLoopFuture<HTTPStatus> {
@@ -88,4 +97,24 @@ struct AcronymsController: RouteCollection {
         .sort(\.$short, .ascending).all()
     }
     
+    
+    func getUserHandler(_ req: Request)
+      -> EventLoopFuture<User> {
+      
+      Acronym.find(req.parameters.get("acronymID"), on: req.db)
+        .unwrap(or: Abort(.notFound))
+        .flatMap { acronym in
+          // 3
+          acronym.$user.get(on: req.db)
+        }
+    }
+
+    
 }
+
+struct CreateAcronymData: Content {
+  let short: String
+  let long: String
+  let userID: UUID
+}
+
