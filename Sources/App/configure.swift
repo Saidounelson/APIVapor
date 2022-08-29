@@ -1,7 +1,7 @@
 import Fluent
 import FluentPostgresDriver
 import Vapor
-
+import Leaf
 // configures your application
 public func configure(_ app: Application) throws {
     // uncomment to serve files from /Public folder
