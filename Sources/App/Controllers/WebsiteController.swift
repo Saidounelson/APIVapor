@@ -12,7 +12,7 @@ import Leaf
 struct WebsiteController: RouteCollection {
 
   func boot(routes: RoutesBuilder) throws {
-    let webSiteRoutes = routes.grouped("web", "index")
+    let webSiteRoutes = routes.grouped("index")
       webSiteRoutes.get(use: indexHandler)
   }
 
