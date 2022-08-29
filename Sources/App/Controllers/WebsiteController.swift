@@ -20,6 +20,7 @@ struct WebsiteController: RouteCollection {
   func indexHandler(_ req: Request)
     -> EventLoopFuture<View> {
       print("Here")
+        
       return req.view.render("index")
   }
 }
