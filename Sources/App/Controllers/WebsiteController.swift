@@ -19,17 +19,8 @@ struct WebsiteController: RouteCollection {
 
   func indexHandler(_ req: Request)
     -> EventLoopFuture<View> {
-        Acronym.query(on: req.db).all()
-            .flatMap { acronyms in
-            let acronymsData = acronyms.isEmpty ? nil : acronyms
-            let context = IndexContext(
-                title: "Home page",
-                acronyms: acronymsData)
-            return req.view.render("index",context)
-            }
-        return Abort(.internalServerError,reason: "Contact support")
-              
-      
+      print("Here")
+      return req.view.render("index")
   }
 }
 
