@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<h1>Acronyms</h1>
+<h1>Acronyms all</h1>
 #if(acronyms):
   <table>
     <thead>
