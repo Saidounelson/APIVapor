@@ -19,8 +19,13 @@ struct WebsiteController: RouteCollection {
 
   func indexHandler(_ req: Request)
     -> EventLoopFuture<View> {
-      print("Here")
-      return req.view.render("index")
+     let content = IndexContext(title: "Home page")
+        
+      return req.view.render("index",content)
   }
 }
 
+struct IndexContext:Encodable {
+    let title:String
+    
+}
