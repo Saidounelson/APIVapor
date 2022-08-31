@@ -19,6 +19,7 @@ struct WebsiteController: RouteCollection {
 
   func indexHandler(_ req: Request)
     -> EventLoopFuture<View> {
+        
         Acronym.query(on: req.db).all().flatMap { acronyms in
             let acronymsData = acronyms.isEmpty ? nil : acronyms
             let content = IndexContext(title: "Home page",acronyms: acronymsData)
@@ -31,5 +32,6 @@ struct WebsiteController: RouteCollection {
 
 struct IndexContext:Encodable {
     let title:String
+    let acronyms: [Acronym]?
     
 }
