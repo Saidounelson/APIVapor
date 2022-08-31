@@ -19,10 +19,14 @@ struct WebsiteController: RouteCollection {
 
   func indexHandler(_ req: Request)
     -> EventLoopFuture<View> {
-     let content = IndexContext(title: "Home page")
-        
-      return req.view.render("index",content)
+        Acronym.query(on: req.db).all().flatMap { acronyms in
+            let acronymsData = acronyms.isEmpty ? nil : acronyms
+            let content = IndexContext(title: "Home page",acronyms: acronymsData)
+             return req.view.render("index",content)
+        }
   }
+    
+    
 }
 
 struct IndexContext:Encodable {

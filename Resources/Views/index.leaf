@@ -7,7 +7,30 @@
   <title>#(title) | Acronyms</title>
 </head>
 <body>
-  <h1>Hello World </h1>
+  <!-- 1 -->
+<h1>Acronyms</h1>
+
+#if(acronyms):
+  <table>
+    <thead>
+      <tr>
+        <th>Short</th>
+        <th>Long</th>
+      </tr>
+    </thead>
+    <tbody>
+      #for(acronym in acronyms):
+        <tr>
+          <td>#(acronym.short)</td>
+          <td>#(acronym.long)</td>
+        </tr>
+      #endfor
+    </tbody>
+  </table>
+#else:
+  <h2>There aren’t any acronyms yet!</h2>
+#endif
+
 </body>
 </html>
 
