@@ -10,7 +10,7 @@
 <!-- 1 -->
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
   <!-- 2 -->
-  <a class="navbar-brand" href="/">TIL</a>
+  <a class="navbar-brand" href="/">APP VAPOR</a>
   <!-- 3 -->
   <button class="navbar-toggler" type="button"
   data-toggle="collapse" data-target="\#navbarSupportedContent"
