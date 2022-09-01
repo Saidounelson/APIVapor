@@ -12,9 +12,9 @@ import Leaf
 struct WebsiteController: RouteCollection {
     
     func boot(routes: RoutesBuilder) throws {
-        let webSiteRoutes = routes.grouped("index")
-        webSiteRoutes.get(use: indexHandler)
-        webSiteRoutes.get("acronyms", ":acronymID", use: acronymHandler)
+        let webSiteRoutes = routes.grouped("")
+        webSiteRoutes.get("index",use: indexHandler)
+        routes.get("acronyms", ":acronymID", use: acronymHandler)
 
     }
     
