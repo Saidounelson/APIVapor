@@ -5,9 +5,11 @@
   <title>#(title) | Acronyms</title>
 </head>
 <body>
+
 <div class="container mt-3">
   #import("content")
 </div>
+
 </body>
 </html>
 
