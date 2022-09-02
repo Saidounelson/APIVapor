@@ -25,7 +25,6 @@ struct WebsiteController: RouteCollection {
             let acronymsData = acronyms.isEmpty ? nil : acronyms
             let content = IndexContext(title: "Home page",acronyms: acronymsData)
             req.logger.info("Show info content \(content)")
-
             return req.view.render("index",content)
         }
     }
@@ -35,9 +34,7 @@ struct WebsiteController: RouteCollection {
         Acronym.find(req.parameters.get("acronymID"), on: req.db)
             .unwrap(or: Abort(.notFound))
             .flatMap { acronym in
-                // 3
                 acronym.$user.get(on: req.db).flatMap { user in
-                    // 4
                     let context = AcronymContext(
                         title: acronym.short,
                         acronym: acronym,
@@ -46,7 +43,6 @@ struct WebsiteController: RouteCollection {
                 }
             }
     }
-    
 }
 
 struct IndexContext:Encodable {
