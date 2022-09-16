@@ -20,7 +20,6 @@ struct AcronymsController: RouteCollection {
         acronymsRoutes.get("first", use: getFirstHandler)
         acronymsRoutes.get("sorted", use: sortedHandler)
         acronymsRoutes.get(":acronymID","user", use: getUserHandler)
-        
     }
     
     func getAllHandler(_ req: Request)

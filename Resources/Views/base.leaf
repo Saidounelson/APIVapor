@@ -8,6 +8,9 @@
 <body>
 
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+<img src="/images/logo.png"
+ class="mx-auto d-block" alt="TIL Logo" />
+
   <a class="navbar-brand" href="/">APP VAPOR</a>
     <button class="navbar-toggler" type="button"
   data-toggle="collapse" data-target="\#navbarSupportedContent"
