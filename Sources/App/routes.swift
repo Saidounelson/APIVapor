@@ -4,8 +4,8 @@ import Dispatch
 
 func routes(_ app: Application) throws {
 
-    app.get("hello") { req async in
-        "Hello, world!"
+    app.get("") { req async in
+        "WELCOME TO API VAPOR"
     }
     
     let acronymsController = AcronymsController()
